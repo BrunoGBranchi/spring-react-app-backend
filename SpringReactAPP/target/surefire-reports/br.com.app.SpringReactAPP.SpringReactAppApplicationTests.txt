@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.com.app.SpringReactAPP.SpringReactAppApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.973 s - in br.com.app.SpringReactAPP.SpringReactAppApplicationTests
