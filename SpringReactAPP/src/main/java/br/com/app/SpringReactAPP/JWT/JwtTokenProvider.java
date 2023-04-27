@@ -3,6 +3,8 @@ package br.com.app.SpringReactAPP.JWT;
 import java.security.Key;
 import java.util.Date;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,14 +15,13 @@ import br.com.app.SpringReactAPP.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class JwtTokenProvider {
 
-    Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+	SecretKey secretKey = SecretKeyGenerator.generateSecretKey();
+	Key key = secretKey;
 
     private final long validityInMilliseconds = 3600000; // 1h
 

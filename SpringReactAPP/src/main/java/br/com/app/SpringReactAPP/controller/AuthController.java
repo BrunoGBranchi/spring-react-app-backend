@@ -3,6 +3,7 @@ package br.com.app.SpringReactAPP.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -31,12 +32,21 @@ public class AuthController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
             String token = jwtTokenProvider.createToken(request.getUsername());
-            System.out.println("logou nessa porra");
             return ResponseEntity.ok(new AuthResponse(token));
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+    
+    @GetMapping("/validateToken")
+    private BodyBuilder validateToken(String token) {
+    	if (jwtTokenProvider.validateToken(token)) {
+			return ResponseEntity.status(HttpStatus.OK);
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED);
+		}
+
+	}
     
     @GetMapping("/")
     public String index() {
