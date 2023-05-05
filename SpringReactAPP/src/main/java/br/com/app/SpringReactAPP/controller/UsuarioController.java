@@ -33,6 +33,11 @@ public class UsuarioController {
         return usuarioRepository.findAll();
     }
     
+    @GetMapping("/usuarioLogado")
+    public Usuario usuarioLogado() {
+        return usuarioService.getUsuarioLogado();
+    }
+    
     @PostMapping("/novo")
     public ResponseEntity<Object> criarUsuario(@Valid @RequestBody Usuario usuario) {
         try {

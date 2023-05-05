@@ -47,13 +47,12 @@ public class AuthController {
 	}
 
 	@GetMapping("/validateToken")
-	private BodyBuilder validateToken(String token) {
+	private ResponseEntity<?> validateToken(String token) {
 		if (jwtTokenProvider.validateToken(token)) {
-			return ResponseEntity.status(HttpStatus.OK);
+			return ResponseEntity.status(HttpStatus.OK).build();
 		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED);
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
-
 	}
 
 	@GetMapping("/")

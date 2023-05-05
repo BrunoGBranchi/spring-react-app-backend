@@ -12,6 +12,7 @@ import br.com.app.SpringReactAPP.form.UsuarioForm;
 import br.com.app.SpringReactAPP.model.Perfil;
 import br.com.app.SpringReactAPP.model.Usuario;
 import br.com.app.SpringReactAPP.repository.UsuarioRepository;
+import br.com.app.SpringReactAPP.utils.UsuarioLogado;
 
 @Service
 public class UsuarioService {
@@ -51,6 +52,10 @@ public class UsuarioService {
 	
 	public void delete(Long id) {
 		usuarioRepository.deleteById(id);
+	}
+	
+	public Usuario getUsuarioLogado() {
+		return UsuarioLogado.getUsuarioLogado();
 	}
 	
 }

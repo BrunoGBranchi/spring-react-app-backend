@@ -1,13 +1,16 @@
 package br.com.app.SpringReactAPP;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import br.com.app.SpringReactAPP.model.Menu;
 import br.com.app.SpringReactAPP.model.Perfil;
 import br.com.app.SpringReactAPP.model.Usuario;
 import br.com.app.SpringReactAPP.repository.UsuarioRepository;
@@ -28,9 +31,11 @@ public class SpringReactAppApplication {
 	
 	@PostConstruct
 	protected void init() {
+		Menu menu = new Menu("Usuarios", "/usuarios");
+		Set<Menu> menus = new HashSet<Menu>();
+		menus.add(menu);
 		List<Perfil> perfis = new ArrayList<Perfil>();
-		perfis.add(createPerfil("USER", "Padrão"));
-		perfis.add(createPerfil("ADMIN", "Administrador"));
+		perfis.add(createPerfil("ADMIN", "Administrador", menus));
 		
 		Usuario usuario = new Usuario();
 		usuario.setLogin("admin");
@@ -43,10 +48,11 @@ public class SpringReactAppApplication {
 		
 	}
 	
-	private Perfil createPerfil(String nivel, String nome) {
+	private Perfil createPerfil(String nivel, String nome, Set<Menu> menus) {
 		Perfil perfil = new Perfil();
 		perfil.setNivel("USER");
 		perfil.setNome("Padrão");
+		perfil.setMenus(menus);
 		return perfil;
 	}
 	
